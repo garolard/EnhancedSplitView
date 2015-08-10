@@ -1,0 +1,117 @@
+﻿<base:PageBase
+    x:Class="EnhancedSplitView.Views.Shell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EnhancedSplitView.Views"
+    xmlns:viewmodel="using:EnhancedSplitView.ViewModels"
+    xmlns:base="using:GeekyTheory.ViewModels"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <base:PageBase.DataContext>
+        <viewmodel:ShellViewModel />
+    </base:PageBase.DataContext>
+    
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="CompactVisualState">
+                    <VisualState.Setters>
+                        <Setter Target="MyMainSplitView.DisplayMode" Value="Overlay"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="FullWidthVisualState">
+                    <VisualState.Setters>
+                        <Setter Target="MyMainSplitView.DisplayMode" Value="CompactOverlay"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <SplitView x:Name="MyMainSplitView"
+                   IsPaneOpen="{Binding IsPaneOpen}"
+                   CompactPaneLength="48"
+                   OpenPaneLength="170"
+                   PaneBackground="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                   DisplayMode="CompactOverlay">
+            <SplitView.Pane>
+                <Grid x:Name="SplitViewPane"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                    <ListView x:Name="MenuItemsList"
+                              ItemsSource="{Binding Menu}"
+                              Margin="0,48,0,0"
+                              VerticalAlignment="Top">
+                        
+                        <interactivity:Interaction.Behaviors>
+                            <interactivity:BehaviorCollection>
+                                <core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <core:InvokeCommandAction Command="{Binding PerformNavigationCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=MenuItemsList}" />
+                                </core:EventTriggerBehavior>
+                            </interactivity:BehaviorCollection>
+                        </interactivity:Interaction.Behaviors>
+                        
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="viewmodel:MenuItemViewModel">
+                                <StackPanel Orientation="Horizontal" Margin="-12,0,0,0">
+                                    <FontIcon x:Name="Glyph"
+                                              Margin="4"
+                                              Width="40"
+                                              Height="40"
+                                              Glyph="{x:Bind Glyph}"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"
+                                              Foreground="Gray"
+                                              FontSize="16"
+                                              ToolTipService.ToolTip="{x:Bind Text}" />
+                                    <TextBlock Text="{x:Bind Text}"
+                                               Margin="8,0,0,0"
+                                               Foreground="Gray"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                            
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+                    <Frame x:Name="SplitViewFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Frame.ContentTransitions>
+                            <TransitionCollection>
+                                <NavigationThemeTransition>
+                                    <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                        <EntranceNavigationTransitionInfo />
+                                    </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                </NavigationThemeTransition>
+                            </TransitionCollection>
+                        </Frame.ContentTransitions>
+                    </Frame>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
+        <Button x:Name="HamburgerButton"
+                FontFamily="Segoe MDL2 Assets"
+                Content=""
+                FontSize="16"
+                Width="48"
+                Height="48"
+                Background="Transparent"
+                Foreground="Gray"
+                VerticalAlignment="Top"
+                BorderThickness="0"
+                Command="{Binding OpenPaneCommand}"/>
+    </Grid>
+</base:PageBase>
