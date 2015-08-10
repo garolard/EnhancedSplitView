@@ -11,6 +11,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/WinBkgTrex.png" Stretch="UniformToFill" />
         </Grid.Background>
-        <TextBlock Style="{StaticResource HeaderTextBlockStyle}" Text="First Page" Foreground="White" />
+        <TextBlock Margin="12" Style="{StaticResource HeaderTextBlockStyle}" Text="First Page" Foreground="White" />
     </Grid>
 </Page>

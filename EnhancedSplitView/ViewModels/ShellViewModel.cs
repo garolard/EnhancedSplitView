@@ -68,6 +68,8 @@ namespace EnhancedSplitView.ViewModels
                 NavigationDestination = typeof(SecondPage)
             });
 
+            PerformNavigationCommandDelegate(Menu.First());
+
             return Task.FromResult(true);
         }
 
