@@ -4,45 +4,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:EnhancedSplitView.Views"
     xmlns:viewmodel="using:EnhancedSplitView.ViewModels"
+    xmlns:helpers="using:EnhancedSplitView.VisualHelpers"
     xmlns:base="using:GeekyTheory.ViewModels"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    helpers:TitleBar.BackgroundColor="Black"
+    helpers:TitleBar.ForegroundColor="White"
+    helpers:TitleBar.ButtonBackgroundColor="Black"
+    helpers:TitleBar.ButtonForegroundColor="White"
     mc:Ignorable="d">
 
     <base:PageBase.DataContext>
         <viewmodel:ShellViewModel />
     </base:PageBase.DataContext>
     
-    <Grid>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="CompactVisualState">
-                    <VisualState.Setters>
-                        <Setter Target="MyMainSplitView.DisplayMode" Value="Overlay"/>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-                <VisualState x:Name="FullWidthVisualState">
-                    <VisualState.Setters>
-                        <Setter Target="MyMainSplitView.DisplayMode" Value="CompactOverlay"/>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="700"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+    <Grid Background="Black">
         <SplitView x:Name="MyMainSplitView"
                    IsPaneOpen="{Binding IsPaneOpen}"
                    CompactPaneLength="48"
                    OpenPaneLength="170"
-                   PaneBackground="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                   DisplayMode="CompactOverlay">
+                   DisplayMode="Overlay"
+                   PaneBackground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <SplitView.Pane>
                 <Grid x:Name="SplitViewPane"
                       VerticalAlignment="Stretch"

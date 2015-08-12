@@ -13,30 +13,6 @@
             <ImageBrush ImageSource="/Assets/WinBkgUnicorn.png" Stretch="UniformToFill" />
         </Grid.Background>
 
-        <TextBlock x:Name="textBlock" Margin="12" Style="{StaticResource HeaderTextBlockStyle}" Text="Home Page" Foreground="White" />
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                
-                <VisualState x:Name="HomeCompactVisualState">
-                    <VisualState.Setters>
-                        <Setter Target="textBlock.Margin">
-                            <Setter.Value>
-                                <Thickness>16,40,12,12</Thickness>
-                            </Setter.Value>
-                        </Setter>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-                
-                <VisualState x:Name="HomeFullWidthVisualState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="700"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-                
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+        <TextBlock x:Name="textBlock" Margin="52,6,0,0" Style="{StaticResource SubheaderTextBlockStyle}" Text="HOME PAGE" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
     </Grid>
 </Page>

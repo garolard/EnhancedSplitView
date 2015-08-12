@@ -12,6 +12,6 @@
             <ImageBrush ImageSource="/Assets/WinBkgNarwhal.png" Stretch="UniformToFill" />
         </Grid.Background>
         
-        <TextBlock Margin="12" Style="{StaticResource HeaderTextBlockStyle}" Text="Second Page" Foreground="White" />
+        <TextBlock Margin="52,6,0,0" Style="{StaticResource SubheaderTextBlockStyle}" Text="SECOND PAGE" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
     </Grid>
 </Page>
