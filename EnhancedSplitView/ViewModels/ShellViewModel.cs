@@ -20,6 +20,7 @@ namespace EnhancedSplitView.ViewModels
         public ShellViewModel()
         {
             OpenPaneCommand = new DelegateCommand(() => { if (IsPaneOpen) IsPaneOpen = false; else IsPaneOpen = true; });
+            PaneClosedCommand = new DelegateCommand(() => IsPaneOpen = false);
             PerformNavigationCommand = new DelegateCommand<MenuItemViewModel>(PerformNavigationCommandDelegate, null);
         }
 
@@ -75,6 +76,8 @@ namespace EnhancedSplitView.ViewModels
 
 
         public ICommand OpenPaneCommand { get; private set; }
+
+        public ICommand PaneClosedCommand { get; private set; }
 
         public ICommand PerformNavigationCommand { get; private set; }
 

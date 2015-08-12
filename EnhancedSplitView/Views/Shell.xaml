@@ -28,6 +28,13 @@
                    OpenPaneLength="170"
                    DisplayMode="Overlay"
                    PaneBackground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <interactivity:Interaction.Behaviors>
+                <interactivity:BehaviorCollection>
+                    <core:EventTriggerBehavior EventName="PaneClosed">
+                        <core:InvokeCommandAction Command="{Binding PaneClosedCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:BehaviorCollection>
+            </interactivity:Interaction.Behaviors>
             <SplitView.Pane>
                 <Grid x:Name="SplitViewPane"
                       VerticalAlignment="Stretch"
