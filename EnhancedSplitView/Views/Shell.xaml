@@ -40,9 +40,19 @@
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"
                       Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-                    <ListView x:Name="MenuItemsList"
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="52,16,0,0">
+                        <TextBlock Text="SPLITVIEW" Style="{StaticResource BodyTextBlockStyle}"
+                                    Foreground="Gray"
+                                   FontFamily="Segoe UI Semibold"
+                                   FontWeight="Bold"
+                                    VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ListView x:Name="MenuItemsList" Grid.Row="1"
                               ItemsSource="{Binding Menu}"
-                              Margin="0,48,0,0"
                               VerticalAlignment="Top">
                         
                         <interactivity:Interaction.Behaviors>
@@ -65,6 +75,7 @@
                                               HorizontalAlignment="Left"
                                               Foreground="Gray"
                                               FontSize="16"
+                                              FontFamily="Segoe MDL2 Assets"
                                               ToolTipService.ToolTip="{x:Bind Text}" />
                                     <TextBlock Text="{x:Bind Text}"
                                                Margin="8,0,0,0"
