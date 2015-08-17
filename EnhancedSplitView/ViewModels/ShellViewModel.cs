@@ -1,45 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using EnhancedSplitView.Views;
-using GeekyTheory.Commands;
-using GeekyTheory.ViewModels;
+using GeekyTool.Commands;
+using GeekyTool.Models;
+using GeekyTool.ViewModels;
 using Windows.UI.Xaml.Navigation;
 
 namespace EnhancedSplitView.ViewModels
 {
-    public class ShellViewModel : ViewModelBase
+    public class ShellViewModel : SplitterViewModelBase
     {
-        private bool isPaneOpen;
-        private ObservableCollection<MenuItemViewModel> menu = new ObservableCollection<MenuItemViewModel>();
-
         public ShellViewModel()
         {
             OpenPaneCommand = new DelegateCommand(() => { if (IsPaneOpen) IsPaneOpen = false; else IsPaneOpen = true; });
             PaneClosedCommand = new DelegateCommand(() => IsPaneOpen = false);
-            PerformNavigationCommand = new DelegateCommand<MenuItemViewModel>(PerformNavigationCommandDelegate, null);
-        }
-
-        public bool IsPaneOpen
-        {
-            get { return isPaneOpen; }
-            set
-            {
-                if (isPaneOpen != value)
-                {
-                    isPaneOpen = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        
-        public ObservableCollection<MenuItemViewModel> Menu
-        {
-            get { return menu; }
         }
         
 
@@ -50,26 +27,50 @@ namespace EnhancedSplitView.ViewModels
 
         public override Task OnNavigatedTo(NavigationEventArgs e)
         {
-            Menu.Add(new MenuItemViewModel()
-            {
-                Glyph = "",
-                Text = "Home page",
-                NavigationDestination = typeof(HomePage)
-            });
-            Menu.Add(new MenuItemViewModel()
-            {
-                Glyph = "",
-                Text = "First page",
-                NavigationDestination = typeof(FirstPage)
-            });
-            Menu.Add(new MenuItemViewModel()
-            {
-                Glyph = "",
-                Text = "Second page",
-                NavigationDestination = typeof(SecondPage)
-            });
+            //Menu.Add(new MenuItemViewModel()
+            //{
+            //    Glyph = "",
+            //    Text = "Home page",
+            //    NavigationDestination = typeof(HomePage)
+            //});
+            //Menu.Add(new MenuItemViewModel()
+            //{
+            //    Glyph = "",
+            //    Text = "First page",
+            //    NavigationDestination = typeof(FirstPage)
+            //});
+            //Menu.Add(new MenuItemViewModel()
+            //{
+            //    Glyph = "",
+            //    Text = "Second page",
+            //    NavigationDestination = typeof(SecondPage)
+            //});
 
-            PerformNavigationCommandDelegate(Menu.First());
+            //PerformNavigationCommandDelegate(Menu.First());
+            var items = new List<MenuItem>()
+            {
+                new MenuItem()
+                {
+                    Icon = "",
+                    Title = "Home page",
+                    View = typeof(HomePage)
+                },
+                new MenuItem()
+                {
+                    Icon = "",
+                    Title = "First page",
+                    View = typeof(FirstPage)
+                },
+                new MenuItem()
+                {
+                    Icon = "",
+                    Title = "Second page",
+                    View = typeof(SecondPage)
+                }
+            };
+            SplitterMenuService.AddItems(items);
+
+            MenuItem = MenuItems.FirstOrDefault(x => x.View == typeof(HomePage));
 
             return Task.FromResult(true);
         }
@@ -79,19 +80,16 @@ namespace EnhancedSplitView.ViewModels
 
         public ICommand PaneClosedCommand { get; private set; }
 
-        public ICommand PerformNavigationCommand { get; private set; }
-
-
-        private void PerformNavigationCommandDelegate(MenuItemViewModel item)
+        protected override void PerformNavigationCommandDelegate(MenuItem item)
         {
-            if (item.NavigationDestination == typeof(HomePage))
+            if (item.View == typeof(HomePage))
             {
                 while (SplitViewFrame.CanGoBack)
                 {
                     SplitViewFrame.GoBack();
                 }
             }
-            SplitViewFrame.Navigate(item.NavigationDestination);
+            SplitViewFrame.Navigate(item.View);
         }
     }
 }

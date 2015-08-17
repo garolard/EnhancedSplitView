@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:EnhancedSplitView"
     xmlns:viewmodel="using:EnhancedSplitView.ViewModels"
-    xmlns:converter="using:GeekyTheory.Converters"
+    xmlns:converter="using:GeekyTool.Converters"
     RequestedTheme="Light">
 
     <Application.Resources>

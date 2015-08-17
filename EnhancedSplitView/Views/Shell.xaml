@@ -4,8 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:EnhancedSplitView.Views"
     xmlns:viewmodel="using:EnhancedSplitView.ViewModels"
+    xmlns:model="using:GeekyTool.Models"
     xmlns:helpers="using:EnhancedSplitView.VisualHelpers"
-    xmlns:base="using:GeekyTheory.ViewModels"
+    xmlns:base="using:GeekyTool"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
@@ -52,32 +53,27 @@
                                     VerticalAlignment="Center"/>
                     </StackPanel>
                     <ListView x:Name="MenuItemsList" Grid.Row="1"
-                              ItemsSource="{Binding Menu}"
-                              VerticalAlignment="Top">
-                        
-                        <interactivity:Interaction.Behaviors>
-                            <interactivity:BehaviorCollection>
-                                <core:EventTriggerBehavior EventName="SelectionChanged">
-                                    <core:InvokeCommandAction Command="{Binding PerformNavigationCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=MenuItemsList}" />
-                                </core:EventTriggerBehavior>
-                            </interactivity:BehaviorCollection>
-                        </interactivity:Interaction.Behaviors>
-                        
+                                ItemsSource="{Binding MenuItems}"
+                                SelectedItem="{Binding MenuItem, Mode=TwoWay}"
+                                SelectionMode="Single"
+                                IsItemClickEnabled="False"
+                                Margin="0,50,0,0">
+
                         <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="viewmodel:MenuItemViewModel">
+                            <DataTemplate x:DataType="model:MenuItem">
                                 <StackPanel Orientation="Horizontal" Margin="-12,0,0,0">
                                     <FontIcon x:Name="Glyph"
                                               Margin="4"
                                               Width="40"
                                               Height="40"
-                                              Glyph="{x:Bind Glyph}"
+                                              Glyph="{x:Bind Icon}"
                                               VerticalAlignment="Center"
                                               HorizontalAlignment="Left"
                                               Foreground="Gray"
                                               FontSize="16"
                                               FontFamily="Segoe MDL2 Assets"
-                                              ToolTipService.ToolTip="{x:Bind Text}" />
-                                    <TextBlock Text="{x:Bind Text}"
+                                              ToolTipService.ToolTip="{x:Bind Title}" />
+                                    <TextBlock Text="{x:Bind Title}"
                                                Margin="8,0,0,0"
                                                Foreground="Gray"
                                                VerticalAlignment="Center"/>
