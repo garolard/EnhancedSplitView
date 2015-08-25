@@ -27,26 +27,6 @@ namespace EnhancedSplitView.ViewModels
 
         public override Task OnNavigatedTo(NavigationEventArgs e)
         {
-            //Menu.Add(new MenuItemViewModel()
-            //{
-            //    Glyph = "",
-            //    Text = "Home page",
-            //    NavigationDestination = typeof(HomePage)
-            //});
-            //Menu.Add(new MenuItemViewModel()
-            //{
-            //    Glyph = "",
-            //    Text = "First page",
-            //    NavigationDestination = typeof(FirstPage)
-            //});
-            //Menu.Add(new MenuItemViewModel()
-            //{
-            //    Glyph = "",
-            //    Text = "Second page",
-            //    NavigationDestination = typeof(SecondPage)
-            //});
-
-            //PerformNavigationCommandDelegate(Menu.First());
             var items = new List<MenuItem>()
             {
                 new MenuItem()
@@ -68,7 +48,7 @@ namespace EnhancedSplitView.ViewModels
                     View = typeof(SecondPage)
                 }
             };
-            SplitterMenuService.AddItems(items);
+            MenuService.AddItems(items);
 
             MenuItem = MenuItems.FirstOrDefault(x => x.View == typeof(HomePage));
 

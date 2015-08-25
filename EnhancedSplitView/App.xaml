@@ -9,6 +9,7 @@
 
     <Application.Resources>
         <viewmodel:ShellViewModel x:Key="Main" />
+        <viewmodel:SplitterModifierViewModel x:Key="Modifier" />
         
         <converter:ToUpperConverter x:Key="ToUpperConverter" />
     </Application.Resources>
