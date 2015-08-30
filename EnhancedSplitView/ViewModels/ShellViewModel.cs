@@ -48,7 +48,8 @@ namespace EnhancedSplitView.ViewModels
                     View = typeof(SecondPage)
                 }
             };
-            MenuService.AddItems(items);
+            //MenuService.AddItems(items);
+            SplitterMenuService.AddItems(items);
 
             MenuItem = MenuItems.FirstOrDefault(x => x.View == typeof(HomePage));
 

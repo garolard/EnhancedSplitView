@@ -10,6 +10,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:behaviors="using:GeekyTool.Behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     helpers:TitleBar.BackgroundColor="Black"
@@ -45,6 +46,11 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
+                    <interactivity:Interaction.Behaviors>
+                        <interactivity:BehaviorCollection>
+                            <behaviors:SplitViewCloserBehavior Splitter="{Binding ElementName=MyMainSplitView}" />
+                        </interactivity:BehaviorCollection>
+                    </interactivity:Interaction.Behaviors>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="52,16,0,0">
                         <TextBlock Text="SPLITVIEW" Style="{StaticResource BodyTextBlockStyle}"
                                     Foreground="Gray"
@@ -57,7 +63,8 @@
                                 SelectedItem="{Binding MenuItem, Mode=TwoWay}"
                                 SelectionMode="Single"
                                 IsItemClickEnabled="False"
-                                Margin="0,50,0,0">
+                                Margin="0,50,0,0"
+                              VerticalAlignment="Top">
 
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="model:MenuItem">
@@ -79,7 +86,7 @@
                                                VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
-                            
+
                         </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
@@ -98,6 +105,17 @@
                             </TransitionCollection>
                         </Frame.ContentTransitions>
                     </Frame>
+                    <Grid x:Name="SplitViewOpener"
+                          Width="170"
+                          Background="Transparent"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Left">
+                        <interactivity:Interaction.Behaviors>
+                            <interactivity:BehaviorCollection>
+                                <behaviors:SplitViewOpenerBehavior Splitter="{Binding ElementName=MyMainSplitView}" />
+                            </interactivity:BehaviorCollection>
+                        </interactivity:Interaction.Behaviors>
+                    </Grid>
                 </Grid>
             </SplitView.Content>
         </SplitView>

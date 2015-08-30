@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace EnhancedSplitView.ViewModels
 {
-    public class SplitterModifierViewModel : ViewModelBase, ISplitterMenuControlAware
+    public class SplitterModifierViewModel : ViewModelBase
     {
         private ISplitterMenuService menuService;
 
@@ -23,7 +23,7 @@ namespace EnhancedSplitView.ViewModels
                 if (menuService == null)
                 {
                     menuService = new SplitterMenuService();
-                    menuService.RegisterCollection(SplitterViewModelBase.menuItems);
+                    //menuService.RegisterCollection(SplitterViewModelBase.menuItems);
                 }
                 return menuService;
             }
@@ -31,19 +31,19 @@ namespace EnhancedSplitView.ViewModels
 
         public override Task OnNavigatedFrom(NavigationEventArgs e)
         {
-            MenuService.RemoveItem(SplitterViewModelBase.menuItems.Last());
+            //MenuService.RemoveItem(SplitterViewModelBase.menuItems.Last());
 
             return Task.FromResult(true);
         }
 
         public override Task OnNavigatedTo(NavigationEventArgs e)
         {
-            MenuService.AddItem(new MenuItem()
-            {
-                Icon = "",
-                Title = "Another page",
-                View = typeof(HomePage)
-            });
+            //MenuService.AddItem(new MenuItem()
+            //{
+            //    Icon = "",
+            //    Title = "Another page",
+            //    View = typeof(HomePage)
+            //});
 
             return Task.FromResult(true);
         }
