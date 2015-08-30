@@ -48,7 +48,7 @@
                     </Grid.RowDefinitions>
                     <interactivity:Interaction.Behaviors>
                         <interactivity:BehaviorCollection>
-                            <behaviors:SplitViewCloserBehavior Splitter="{Binding ElementName=MyMainSplitView}" />
+                            <behaviors:SplitViewSwipeBehavior ManipulationType="Close" Splitter="{Binding ElementName=MyMainSplitView}" />
                         </interactivity:BehaviorCollection>
                     </interactivity:Interaction.Behaviors>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="52,16,0,0">
@@ -112,7 +112,7 @@
                           HorizontalAlignment="Left">
                         <interactivity:Interaction.Behaviors>
                             <interactivity:BehaviorCollection>
-                                <behaviors:SplitViewOpenerBehavior Splitter="{Binding ElementName=MyMainSplitView}" />
+                                <behaviors:SplitViewSwipeBehavior ManipulationType="Open" Splitter="{Binding ElementName=MyMainSplitView}" />
                             </interactivity:BehaviorCollection>
                         </interactivity:Interaction.Behaviors>
                     </Grid>
